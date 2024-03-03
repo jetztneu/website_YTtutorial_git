@@ -6,9 +6,48 @@ Created on Sat Feb 24 21:35:52 2024
 """
 
 from flask import Flask, render_template
+import pandas as pd
 
 app = Flask(__name__)
 
+poem_list = [
+    {
+        'id':'1',
+        'title':'Arzee hai'
+    },
+    {
+        'id':'2',
+        'title':'Poem 2'
+    },
+    {
+        'id':'3',
+        'title':'Galti'
+    }
+]
+
+book_list = [
+    {
+        'id':1,
+        'title':'Abhinav Anubhav',
+        'year':'2010'
+    },
+    {
+        'id':2,
+        'title':'Arzee hai',
+        'year': '2017'
+
+    },
+    {
+        'id':3,
+        'title':'Khushi ki Khoj',
+        'year': '2024'
+    }
+]
+
+plist = pd.read_csv('static\Poem_list.csv')
+
 @app.route("/")
 def home():
-    return render_template('home.html')
+    
+    
+    return render_template('home.html',poem_list=poem_list,book_list=book_list,plist=plist)
