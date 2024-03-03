@@ -5,12 +5,12 @@ Created on Sat Feb 24 21:35:52 2024
 @author: abhin
 """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 import pandas as pd
 
 app = Flask(__name__)
 
-poem_list = [
+POEM = [
     {
         'id':'1',
         'title':'Arzee hai'
@@ -25,7 +25,7 @@ poem_list = [
     }
 ]
 
-book_list = [
+BOOK = [
     {
         'id':1,
         'title':'Abhinav Anubhav',
@@ -48,6 +48,9 @@ plist = pd.read_csv('static\Poem_list.csv')
 
 @app.route("/")
 def home():
-    
-    
-    return render_template('home.html',poem_list=poem_list,book_list=book_list,plist=plist)
+    return render_template('home.html',poem_list=POEM,book_list=BOOK,plist=plist)
+
+
+@app.route("/api/books")
+def list_books():
+    return jsonify(BOOK)
